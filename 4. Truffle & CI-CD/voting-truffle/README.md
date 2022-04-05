@@ -23,7 +23,7 @@ Pour factoriser le code, le choix de créer un tableau de paramètre a été fai
 | startProposalsRegistering | RegisteringVoters | `'Registering proposals cant be started now'` | ProposalsRegistrationStarted | 
 | endProposalsRegistering | ProposalsRegistrationStarted | `'Registering proposals havent started yet'` | ProposalsRegistrationEnded | 
 | startVotingSession | ProposalsRegistrationEnded | `'Registering proposals phase is not finished'` | VotingSessionStarted | 
-| endVotingSession | VotingSessionStarted | `'Voting session havent started yet` | VotingSessionEnded | 
+| endVotingSession | VotingSessionStarted | `'Voting session havent started yet'` | VotingSessionEnded | 
 
 ## Installation
 Pour installer le projet, lancer: 
@@ -77,7 +77,8 @@ Le rapport généré par eth-gas-reporter est de la forme:
 |  Voting                                    ·           -  ·          -  ·    2137466  ·      31.8 %  ·          -  │
 ·--------------------------------------------|--------------|-------------|-------------|--------------|-------------·
 ```
-## Couverture des testsLancer la commande
+## Couverture des tests
+Lancer la commande
 ```  
 truffle run coverage
 ```
