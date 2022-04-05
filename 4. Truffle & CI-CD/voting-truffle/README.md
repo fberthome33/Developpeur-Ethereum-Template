@@ -3,9 +3,9 @@
 Le but de ce projet est d'ajouter les tests unitaires sur le projet Voting.sol.
 
 
-# Fichier
+# Introduction
 
-Pour ce projet un fichier de tests a été créé : voting-truffle/test/voting.test.js. 
+Pour ce projet un fichier de tests a été créé : test/voting.test.js. 
 Ce fichier est découpé par test de méthode.
 
 ## Méthodologie
@@ -25,13 +25,69 @@ Pour factoriser le code, le choix de créer un tableau de paramètre a été fai
 | startVotingSession | ProposalsRegistrationEnded | `'Registering proposals phase is not finished'` | VotingSessionStarted | 
 | endVotingSession | VotingSessionStarted | `'Voting session havent started yet` | VotingSessionEnded | 
 
+## Installation
+Pour installer le projet, lancer: 
+```  
+npm install
+```
+
 ## Lancement des tests
 Lancer la commande
 ```  
 truffle test 
 ```
 
+Pour utiliser Ganache, lancer la commande
+
+```
+truffle test --network develop_ganache
+```
+
+Le rapport généré par eth-gas-reporter est de la forme:
+```
+·--------------------------------------------|----------------------------|-------------|----------------------------·
+|    Solc version: 0.8.13+commit.abaa5c0e    ·  Optimizer enabled: false  ·  Runs: 200  ·  Block limit: 6718946 gas  │
+·············································|····························|·············|·····························
+|  Methods                                                                                                           │
+···············|·····························|··············|·············|·············|··············|··············
+|  Contract    ·  Method                     ·  Min         ·  Max        ·  Avg        ·  # calls     ·  eur (avg)  │
+···············|·····························|··············|·············|·············|··············|··············
+|  Migrations  ·  setCompleted               ·           -  ·          -  ·      28813  ·           1  ·          -  │
+···············|·····························|··············|·············|·············|··············|··············
+|  Voting      ·  addProposal                ·       59580  ·      76680  ·      65912  ·          54  ·          -  │
+···············|·····························|··············|·············|·············|··············|··············
+|  Voting      ·  addVoter                   ·           -  ·          -  ·      50196  ·          77  ·          -  │
+···············|·····························|··············|·············|·············|··············|··············
+|  Voting      ·  endProposalsRegistering    ·           -  ·          -  ·      30575  ·          20  ·          -  │
+···············|·····························|··············|·············|·············|··············|··············
+|  Voting      ·  endVotingSession           ·           -  ·          -  ·      30509  ·          13  ·          -  │
+···············|·····························|··············|·············|·············|··············|··············
+|  Voting      ·  setVote                    ·       41004  ·      78016  ·      68483  ·          46  ·          -  │
+···············|·····························|··············|·············|·············|··············|··············
+|  Voting      ·  startProposalsRegistering  ·           -  ·          -  ·      47653  ·          25  ·          -  │
+···············|·····························|··············|·············|·············|··············|··············
+|  Voting      ·  startVotingSession         ·           -  ·          -  ·      30530  ·          19  ·          -  │
+···············|·····························|··············|·············|·············|··············|··············
+|  Voting      ·  tallyVotes                 ·           -  ·          -  ·      69349  ·           7  ·          -  │
+···············|·····························|··············|·············|·············|··············|··············
+|  Deployments                               ·                                          ·  % of limit  ·             │
+·············································|··············|·············|·············|··············|··············
+|  Migrations                                ·           -  ·          -  ·     250154  ·       3.7 %  ·          -  │
+·············································|··············|·············|·············|··············|··············
+|  Voting                                    ·           -  ·          -  ·    2137466  ·      31.8 %  ·          -  │
+·--------------------------------------------|--------------|-------------|-------------|--------------|-------------·
+```
 ## Couverture des testsLancer la commande
 ```  
-truffle test 
+truffle run coverage
 ```
+Génère un rapport sous la forme
+```  
+File         |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
+-------------|----------|----------|----------|----------|----------------|
+ contracts/  |      100 |    96.43 |      100 |      100 |                |
+  voting.sol |      100 |    96.43 |      100 |      100 |                |
+-------------|----------|----------|----------|----------|----------------|
+All files    |      100 |    96.43 |      100 |      100 |                |
+-------------|----------|----------|----------|----------|----------------|
+```  
