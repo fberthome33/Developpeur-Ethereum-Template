@@ -128,9 +128,15 @@ contract('Voting', function (accounts) {
       await this.VotingInstance.endProposalsRegistering({
         from: owner
       });
-      await expectRevert(this.VotingInstance.addProposal('', {
+      await expectRevert(this.VotingInstance.addProposal('PROPOSAL', {
         from: voter_1
       }), "Proposals are not allowed yet");
+    });
+
+    it('addProposal should revert if proposal is empty', async function () {
+      await expectRevert(this.VotingInstance.addProposal('', {
+        from: voter_1
+      }), 'Vous ne pouvez pas ne rien proposer');
     });
 
     it('addProposal should add one proposal', async function () {
