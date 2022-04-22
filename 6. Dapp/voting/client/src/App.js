@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Voting from "./contracts/Voting.json";
 import getWeb3 from "./getWeb3";
 import Button from 'react-bootstrap/Button';
