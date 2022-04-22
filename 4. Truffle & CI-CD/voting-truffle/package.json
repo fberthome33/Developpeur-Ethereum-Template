@@ -6,6 +6,9 @@
     "eth-gas-reporter": "0.2.24",
     "solidity-coverage": "^0.7.20",
     "truffle": "5.4.29",
-    "web3": "1.7.0"
+    "@truffle/hdwallet-provider": "^2.0.4",
+    "dotenv": "^16.0.0",
+    "ethereumjs-tx": "^2.1.2",
+    "web3": "^1.7.3"
   }
 }

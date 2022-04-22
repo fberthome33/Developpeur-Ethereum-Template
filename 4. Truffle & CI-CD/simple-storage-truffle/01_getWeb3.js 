@@ -1,0 +1,55 @@
+var Web3 = require('web3'); 
+var Tx = require("ethereumjs-tx").Transaction;
+console.log(Tx);
+web3 = new
+Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/7572a0d258db41f3ac3c8d56f64d2020'));
+
+web3.eth.getBalance("0x7A92d80169d72f590105945657bF43d5be963649", function(err, result){
+   if (err) console.log(err);
+   else console.log(web3.utils.fromWei(result, "ether") + " ETH")
+});
+console.log('Calling Contract.....');
+
+
+var  ABI  =  [{"inputs":[],"name":"get","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"x","type":"uint256"}],"name":"set","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+var  addr  =  "0x7A92d80169d72f590105945657bF43d5be963649";
+
+var  Contract  =  new web3.eth.Contract(ABI, addr);
+
+// FUNCTION must the name of the function you want to call. 
+
+Contract.methods.get().call().then(console.log);
+
+const SSaddress = '0x7A92d80169d72f590105945657bF43d5be963649'; //Addres of SimpleStorage contract
+
+const account1 = '0xf9C10b5fcbF13138c5bD6C471E46744E7015ADcE'; //Your account address 1
+const privateKey1 = Buffer.from('128e5df3150269b78ff685ff478ac3e5b8f1222b3c8800e8e284db1214873624', 'hex');
+ 
+// Deploy the contract
+/*
+web3.eth.getTransactionCount(account1, (err, txCount) => {
+	const simpleStorage = new web3.eth.Contract(ABI, SSaddress);
+  console.log(simpleStorage)
+	const data = simpleStorage.methods.set(33).encodeABI();
+	const txObject = {
+		nonce:    web3.utils.toHex(txCount),
+		gasLimit: web3.utils.toHex(1000000), 
+		gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
+		to: SSaddress,
+		data: data
+	}
+ 
+	var tx = new Tx(txObject, {'chain':'ropsten'});
+	tx.sign(privateKey1)
+ 
+	const serializedTx = tx.serialize()
+	const raw = '0x' + serializedTx.toString('hex')
+ 
+	web3.eth.sendSignedTransaction(raw, (err, txHash) => {
+		console.log('txHash:', txHash, 'err:', err)
+		//Use this txHash to find the contract on Etherscan!
+	})
+})*/
+
+
+Contract.methods.get().call().then(console.log);

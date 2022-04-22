@@ -3,6 +3,7 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 require('dotenv').config();
 
 module.exports = {
+  contracts_build_directory: path.join(__dirname, "client/src/contracts"),
   /**
    * Networks define how you connect to your ethereum client and let you set the
    * defaults web3 uses to send transactions. If you don't specify one truffle
@@ -31,6 +32,18 @@ module.exports = {
       network_id: "*",       // Any network (default: none)
     },
 
+    rinkeby: {
+      provider: function() {
+        return new HDWalletProvider(`${process.env.MNEMONIC}`, `https://rinkeby.infura.io/v3/${process.env.INFURA_PROJECT_ID}`)
+      },
+      network_id: 4
+    },
+    ropsten: {
+      provider: function() {
+        return new HDWalletProvider(`${process.env.MNEMONIC}`, `https://ropsten.infura.io/v3/${process.env.INFURA_PROJECT_ID}`)
+      },
+      network_id: 3
+    },
     kovan: {
       provider: () => new HDWalletProvider(`${process.env.MNEMONIC}`, `https://kovan.infura.io/v3/${process.env.INFURA_PROJECT_ID}`),
       from: "0x362e75e2744Fa57f7F272913b692c6bFbF5692da",
