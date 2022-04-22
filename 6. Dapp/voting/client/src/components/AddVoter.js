@@ -24,7 +24,7 @@ export default class AddVoter extends React.Component {
         return(
       <><div style={{ display: 'flex', justifyContent: 'center' }}>
             <Card style={{ width: '50rem' }}>
-              <Card.Header><strong>Liste des comptes autorisés</strong></Card.Header>
+              <Card.Header><strong>Add Voter Account</strong></Card.Header>
               <Card.Body>
                 <ListGroup variant="flush">
                   <ListGroup.Item>
@@ -47,10 +47,11 @@ export default class AddVoter extends React.Component {
             </Card>
           </div><br></br><div style={{ display: 'flex', justifyContent: 'center' }}>
               <Card style={{ width: '50rem' }}>
-                <Card.Header><strong>Autoriser un nouveau compte</strong></Card.Header>
+                <Card.Header><strong>Add a new Voter</strong></Card.Header>
                 <Card.Body>
                   <Form.Group controlId="formAddress">
-                    <Form.Control type="text" id="address"
+                    <Form.Label>Voter address</Form.Label>
+                    <Form.Control type="text" id="address" placeholder="Enter address" 
                       ref={(input) => { this.props.state.address = input; } } />
                   </Form.Group>
                   <Button onClick={this.addVoter} variant="dark"> Autoriser </Button>

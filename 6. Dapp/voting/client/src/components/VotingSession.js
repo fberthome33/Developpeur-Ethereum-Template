@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
 
-export default class AddProposal extends React.Component {
+export default class VotingSession extends React.Component {
 
     constructor(props) {
         super(props);
@@ -14,14 +14,20 @@ export default class AddProposal extends React.Component {
 
     }
 
-
-    addProposal = async (e) => {
+    setVote = async (e) => {
       e.preventDefault();
       const { accounts, contract, owner, listAddress } = this.props.state;
-      let newProposalDesc = this.props.state.proposal.value;
-      await contract.methods.addProposal(newProposalDesc).send({ from: accounts[0] });
+      let newProposalDesc = this.props.state.proposalId.value;
+      await contract.methods.setVote(newProposalDesc).send({ from: accounts[0] });
 
 
+    }
+
+    setVoteButton = async (e, index) => {
+      e.preventDefault();
+      const { accounts, contract, owner, listAddress } = this.props.state;
+      //let newProposalDesc = this.props.state.proposalId.value;
+      await contract.methods.setVote(Number(index)).send({ from: accounts[0] });
 
 
     }
@@ -31,7 +37,7 @@ export default class AddProposal extends React.Component {
       <><div style={{ display: 'flex', justifyContent: 'center' }}>
 
             <Card style={{ width: '50rem' }}>
-              <Card.Header><strong>List of Proposals</strong></Card.Header>
+              <Card.Header><strong>Vote for a proposal</strong></Card.Header>
               <Card.Body>
                 <ListGroup variant="flush">
                   <ListGroup.Item>
@@ -40,12 +46,14 @@ export default class AddProposal extends React.Component {
                         <tr>
                           <th>Id</th>
                           <th>Description</th>
+                          <th>Vote Count</th>
+                          <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
                         {this.props.state.listProposal !== null &&
                           this.props.state.listProposal.map((proposal) => (
-                            <tr><td>{proposal.id}</td><td>{proposal.description}</td></tr>
+                            <tr><td>{proposal.id}</td><td>{proposal.description}</td><td>{proposal.voteCount}</td><td><Button onClick={(e) => this.setVoteButton(e, proposal.id)} variant="dark"> Voter </Button></td></tr>
                           ))}
                       </tbody>
                     </Table>
@@ -53,19 +61,7 @@ export default class AddProposal extends React.Component {
                 </ListGroup>
               </Card.Body>
             </Card>
-          </div><br></br><div style={{ display: 'flex', justifyContent: 'center' }}>
-              <Card style={{ width: '50rem' }}>
-                <Card.Header><strong>Add a proposal</strong></Card.Header>
-                <Card.Body>
-                  <Form.Group controlId="formProposal">
-                    <Form.Label>Proposal Description</Form.Label>
-                    <Form.Control type="text" id="proposal" placeholder="Enter proposal description" 
-                      ref={(input) => { this.props.state.proposal = input; } } />
-                  </Form.Group>
-                  <Button onClick={this.addProposal} variant="dark"> Add </Button>
-                </Card.Body>
-              </Card>
-            </div></>
+          </div></>
         )
     }
 

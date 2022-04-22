@@ -69,12 +69,12 @@ contract Voting is Ownable {
     
     /** 
         getOneProposal method
-        @param _id index of a proposal
-        @return the propasal specified by an _id index
+        @param _proposalIndex index of a proposal
+        @return the propasal specified by an _proposalIndex index
         @dev Throws if caller is not a voter
     */
-    function getOneProposal(uint _id) external onlyVoters view returns (Proposal memory) {
-        return proposalsArray[_id];
+    function getOneProposal(uint _proposalIndex) external onlyVoters view returns (Proposal memory) {
+        return proposalsArray[_proposalIndex];
     }
 
  
@@ -127,22 +127,22 @@ contract Voting is Ownable {
     /**
         setVote Method
         @notice set a proposal choice of a voter
-        @param _id index of a proposal
+        @param _proposalIndex index of a proposal
         @dev Throws if caller is not a voter
         @dev Throws if workflowStatus is not equals to VotingSessionStarted
         @dev Throws if voter has already voted
         @dev Throws if the proposalIndex is not known
     */
-    function setVote( uint _id) external onlyVoters {
+    function setVote( uint _proposalIndex) external onlyVoters {
         require(workflowStatus == WorkflowStatus.VotingSessionStarted, 'Voting session havent started yet');
         require(voters[msg.sender].hasVoted != true, 'You have already voted');
-        require(_id < proposalsArray.length, 'Proposal not found'); // pas obligé, et pas besoin du >0 car uint
+        require(_proposalIndex < proposalsArray.length, 'Proposal not found'); // pas obligé, et pas besoin du >0 car uint
 
-        voters[msg.sender].votedProposalId = _id;
+        voters[msg.sender].votedProposalId = _proposalIndex;
         voters[msg.sender].hasVoted = true;
-        proposalsArray[_id].voteCount++;
+        proposalsArray[_proposalIndex].voteCount++;
 
-        emit Voted(msg.sender, _id);
+        emit Voted(msg.sender, _proposalIndex);
     }
 
     // ::::::::::::: STATE ::::::::::::: //
